@@ -1,62 +1,74 @@
 import * as React from 'react';
-import {Text, View, SafeAreaView} from 'react-native';
-import {NavigationContainer, useNavigation} from '@react-navigation/native';
+import {StyleSheet} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Button} from '@react-navigation/elements';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import PopularPage from './src/page/PopularPage.tsx';
+import ProfilePage from './src/page/ProfilePage.tsx';
+import TrendingPage from './src/page/TrendingPage.tsx';
+import FavoritePage from './src/page/FavoritePage.tsx';
+import MyPage from './src/page/MyPage.tsx';
+import DetailsPage from './src/page/DetailsPage.tsx';
 
-function ProfileScreen() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-}
-
-function FeedScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Feed Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
-    </View>
-  );
-}
-
-function MessagesScreen() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Messages Screen</Text>
-    </View>
-  );
-}
+// 图标
+const TabBarIconHot = ({color, size}: {color: string; size: number}) => (
+  <MaterialIcons name="whatshot" size={size} color={color} />
+);
+const TabBarIconTrending = ({color, size}: {color: string; size: number}) => (
+  <MaterialIcons name="trending-up" size={size} color={color} />
+);
+const TabBarIconFavorite = ({color, size}: {color: string; size: number}) => (
+  <MaterialIcons name="favorite" size={size} color={color} />
+);
+const TabBarIconMy = ({color, size}: {color: string; size: number}) => (
+  <Ionicons name="person" size={size} color={color} />
+);
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-function HomeTabs() {
+// Tabs
+function BottomTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Feed"
-        component={FeedScreen}
+        name="Popular"
+        component={PopularPage}
         options={{
-          tabBarLabel: '首页',
-          tabBarIcon: ({focused, color, size}) => (
-            <Ionicons
-              name={focused ? 'home' : 'home-outline'}
-              size={size}
-              color={color}
-            />
-          ),
-          headerShown: true,
+          tabBarLabel: '最热',
+          tabBarIcon: TabBarIconHot,
+          headerShown: false, //是否显示头部标题
         }}
       />
-      <Tab.Screen name="Messages" component={MessagesScreen} />
+      <Tab.Screen
+        name="Trending"
+        component={TrendingPage}
+        options={{
+          tabBarLabel: '趋势',
+          tabBarIcon: TabBarIconTrending,
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Favorite"
+        component={FavoritePage}
+        options={{
+          tabBarLabel: '收藏',
+          tabBarIcon: TabBarIconFavorite,
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="My"
+        component={MyPage}
+        options={{
+          tabBarLabel: '我的',
+          tabBarIcon: TabBarIconMy,
+          headerShown: false,
+        }}
+      />
     </Tab.Navigator>
   );
 }
@@ -66,10 +78,11 @@ function RootStack() {
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
-        component={HomeTabs}
+        component={BottomTabs}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Profile" component={ProfilePage} />
+      <Stack.Screen name="Details" component={DetailsPage} />
     </Stack.Navigator>
   );
 }
@@ -81,3 +94,15 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  iconImg: {
+    width: 20,
+    height: 20,
+  },
+  viewContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

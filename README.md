@@ -1,5 +1,15 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
+# 注意事项：
+使用Icons图标安装两个依赖
+```sh
+# Using npm
+npm install --save react-native-vector-icons
+npm install --save-dev @types/react-native-vector-icons
+安卓端在：android/app/build.gradle中加入  apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+```
+
+
 # Getting Started
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.

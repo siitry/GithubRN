@@ -2,7 +2,7 @@ import type {FC} from 'react';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-export const TrendingPage: FC = () => {
+const TrendingPage: FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>TrendingPage</Text>
@@ -18,9 +18,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFC',
   },
   welcomeText: {
-    fontSize: 20,
-    color: 'white',
     textAlign: 'center',
     margin: 20,
   },
 });
+export default TrendingPage;

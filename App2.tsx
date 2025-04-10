@@ -10,8 +10,8 @@
 // } from '@react-navigation/native-stack';
 // import {Text, TextInput, View, Image, StyleSheet} from 'react-native';
 // import {Button} from '@react-navigation/elements';
-// import {Images} from './page/assets';
-// import HomeScreen from './page/HomePage';
+// import {Images} from './src/assets';
+// import HomeScreen from './src/HomePage';
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // // 1. 定义导航参数类型
 // type RootStackParamList = {
@@ -86,7 +86,7 @@
 //   return (
 //     // <Image
 //     //   style={{width: 50, height: 50}}
-//     //   source={require('./page/assets/react-native-logo.png')}
+//     //   source={require('./src/assets/react-native-logo.png')}
 //     // />
 //     <Image style={styles.iconImg} source={Images.Logo} />
 //   );

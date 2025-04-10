@@ -2,10 +2,10 @@ import type {FC} from 'react';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-export const PopularPage: FC = () => {
+ const MyPage: FC = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.welcomeText}>PopularPage</Text>
+      <Text style={styles.welcomeText}>MyPage</Text>
     </View>
   );
 };
@@ -18,9 +18,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFC',
   },
   welcomeText: {
-    fontSize: 20,
-    color: 'white',
     textAlign: 'center',
     margin: 20,
   },
 });
+export default MyPage;
