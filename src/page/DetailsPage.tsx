@@ -1,18 +1,22 @@
-import type {FC} from 'react';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '@/types/types';
+import {useSelector} from 'react-redux';
+import {PageParams} from '@/interface';
 
-type RootStackParamList = {
-  Details: {id?: number; name?: string};
-};
-type DetailsPageProps = {
-  route: RouteProp<RootStackParamList, 'Details'>;
-  navigation: NativeStackNavigationProp<RootStackParamList, 'Details'>;
-};
-const DetailsPage: FC<DetailsPageProps> = ({route}) => {
-  const {id, name} = route.params;
+type Props = NativeStackScreenProps<RootStackParamList, 'Details'>;
+const DetailsPage = ({route, navigation}: Props) => {
+  const pageParams: PageParams = useSelector(
+    (state: any) => state.root.pageParams,
+  );
+  const {id, name} = route.params || {};
+
+  useEffect(() => {
+    console.log('TEST 页面参数', pageParams);
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>DetailsPage</Text>
