@@ -1,3 +1,3 @@
 export const Images = {
-  Logo: require('./react-native-logo.png'),
+  Logo: require('@/assets/images/react-native-logo.png'),
 };

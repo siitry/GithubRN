@@ -6,17 +6,20 @@ import {StyleSheet, Text, View} from 'react-native';
 // import {Button} from '@react-navigation/elements';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {Button} from '@react-navigation/elements';
-import { useNavigate } from '../navigation/Navigate';
+import {useNavigate} from '@/navigation/Navigate';
+import {useDispatch, useSelector} from 'react-redux';
+import {Dispatch} from '@reduxjs/toolkit';
+import {setLanguageInfo, setTheme} from '@/store/slice.tsx';
 
 const Tab = createMaterialTopTabNavigator();
 
 // type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Popular'>;
 // const navigation = useNavigation<NavigationProp>();
 
-
 const PopularPage: React.FC = () => {
   // const navigation = useNavigation<NavigationProp>();
-  const { navigateTo } = useNavigate();
+  const {navigateTo} = useNavigate();
+  const dispatch: Dispatch = useDispatch();
   const tabNames = [
     'Java',
     'Python',
@@ -31,11 +34,17 @@ const PopularPage: React.FC = () => {
     'C#',
     '.NET',
   ];
+
+  const toDetails = (id: string | number, name: string) => {
+    dispatch(setLanguageInfo({id, name}));
+    // dispatch(setTheme('#2196F3')); // 测试设置绿色主题
+    navigateTo('Details', {id, name});
+  };
   //通用组件页
   const TabContent = ({tabName}: {tabName: string}) => (
     <View style={styles.container}>
       <Text>{tabName} Content</Text>
-      <Button onPress={() => navigateTo('Details', {id: 666, name: tabName})}>跳转到【{tabName}】详情页</Button>
+      <Button onPress={() => toDetails(666, tabName)}>跳转到【{tabName}】详情页</Button>
     </View>
   );
 
