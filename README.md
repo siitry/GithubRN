@@ -9,6 +9,17 @@ npm install --save-dev @types/react-native-vector-icons
 安卓端在：android/app/build.gradle中加入  apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 ```
 
+🚀 打包 Release APK（正式发布）
+1. 生成签名密钥（只需一次）
+   在项目根目录运行（或任何你喜欢的目录）：
+```sh
+
+keytool -genkeypair -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+然后把 my-release-key.keystore 文件移动到项目目录下的：
+android/app/
+密码123456
+```
+
 
 # Getting Started
 

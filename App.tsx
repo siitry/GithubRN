@@ -22,6 +22,7 @@ import store, {persistor} from '@/store/store.tsx';
 import {PlatformPressable} from '@react-navigation/elements';
 import {PageParams, Theme} from '@/interface';
 import LoadingScreen from '@/components/LoadingScreen.tsx';
+import FetchDemo from '@/page/FetchDemo.tsx';
 
 // 图标
 const TabBarIconHot = ({color, size}: {color: string; size: number}) => (
@@ -189,6 +190,7 @@ function RootStack() {
       />
       <Stack.Screen name="Profile" component={ProfilePage} />
       <Stack.Screen name="Details" component={DetailsPage} />
+      <Stack.Screen name="Fetch" component={FetchDemo} />
     </Stack.Navigator>
   );
 }
