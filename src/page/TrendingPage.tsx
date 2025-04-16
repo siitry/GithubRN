@@ -16,11 +16,15 @@ const TrendingPage: FC = () => {
   const toGetData = () => {
     navigateTo('Fetch');
   }
+  const toGetDataStore = () => {
+    navigateTo('DataStore');
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>TrendingPage</Text>
       <Button onPress={() => changeTheme()}>修改主题色</Button>
       <Button onPress={() => toGetData()}>跳转数据页</Button>
+      <Button onPress={() => toGetDataStore()}>跳转获取数据</Button>
     </View>
   );
 };

@@ -2,26 +2,20 @@ import {useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DataStore = () => {
-  const fetchData = (url: string) => {
-    fetchLocalData(url)
-      .then(wrapData => {
-        if (wrapData && checkTimestampValid(wrapData.timestamp)) {
-          return wrapData;
-        } else {
-          fetchNetData(url).then(data => {
-            return _wrapData(data);
-          });
-        }
-      })
-      .catch(err => {
-        fetchNetData(url)
-          .then(data => {
-            return _wrapData(data);
-          })
-          .catch(err => {
-            console.error(err);
-          });
-      });
+  const fetchData = async (url: string) => {
+    try {
+      const wrapData = await fetchLocalData(url);
+      if (wrapData && checkTimestampValid(wrapData.timestamp)) {
+        return wrapData;
+      } else {
+        const netData = await fetchNetData(url);
+        return _wrapData(netData);
+      }
+    } catch (err) {
+      console.error('获取本地或网络数据失败:', err);
+      const netData = await fetchNetData(url);
+      return _wrapData(netData);
+    }
   };
 
   const saveData = async (url: string, data: any, callback?: any) => {
@@ -30,7 +24,6 @@ const DataStore = () => {
       await AsyncStorage.setItem(
         url,
         JSON.stringify(_wrapData(data)),
-        callback,
       );
       console.log('数据存储成功');
     } catch (error) {
@@ -52,6 +45,7 @@ const DataStore = () => {
       }
     } catch (error) {
       console.error('获取数据时出错:', error);
+      return fetchNetData(url).then(data => _wrapData(data));
     }
   };
 
@@ -61,21 +55,17 @@ const DataStore = () => {
    */
   const fetchNetData = async (url: string) => {
     try {
-      await fetch(url)
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          throw new Error('Network error');
-        })
-        .then(resData => {
-          saveData(url, resData);
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    } catch (e) {
-      console.log(e);
+      const res = await fetch(url);
+      if (res.ok) {
+        const resData = await res.json();
+        await saveData(url, resData);
+        return resData;
+      } else {
+        throw new Error('Network error');
+      }
+    } catch (err) {
+      console.error('获取网络数据失败:', err);
+      throw err;
     }
   };
 
