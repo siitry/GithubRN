@@ -19,8 +19,7 @@ import DetailsPage from '@/page/DetailsPage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import store, {persistor} from '@/store/store.tsx';
-import {PlatformPressable} from '@react-navigation/elements';
-import {PageParams, Theme} from '@/interface';
+import {Theme} from '@/interface';
 import LoadingScreen from '@/components/LoadingScreen.tsx';
 import FetchDemo from '@/page/FetchDemo.tsx';
 import DataStoreDemo from '@/page/DataStoreDemo.tsx';
@@ -99,10 +98,7 @@ const Stack = createNativeStackNavigator();
 
 // Tabs
 function BottomTabs() {
-
-  const theme: Theme = useSelector(
-    (state: any) => state.root.theme,
-  );
+  const theme: Theme = useSelector((state: any) => state.root.theme);
   console.log('当前主题色：', theme);
   // const routes = [
   //   {name: 'Popular', component: PopularPage, tabBarLabel: '最热', tabBarIcon: TabBarIconHot, headerShown: false,},
@@ -128,8 +124,8 @@ function BottomTabs() {
           //   color: theme.tabBarBadgeStyle.color,
           //   backgroundColor: theme.tabBarBadgeStyle.backgroundColor,
           // },
-          tabBarActiveTintColor: theme.tabBarActiveTintColor,//激活
-          tabBarInactiveTintColor: theme.tabBarInactiveTintColor,//非激活
+          tabBarActiveTintColor: theme.tabBarActiveTintColor, //激活
+          tabBarInactiveTintColor: theme.tabBarInactiveTintColor, //非激活
         }}
       />
       <Tab.Screen
@@ -143,8 +139,8 @@ function BottomTabs() {
           //   color: theme.tabBarBadgeStyle.color,
           //   backgroundColor: theme.tabBarBadgeStyle.backgroundColor,
           // },
-          tabBarActiveTintColor: theme.tabBarActiveTintColor,//激活
-          tabBarInactiveTintColor: theme.tabBarInactiveTintColor,//非激活
+          tabBarActiveTintColor: theme.tabBarActiveTintColor, //激活
+          tabBarInactiveTintColor: theme.tabBarInactiveTintColor, //非激活
         }}
       />
       <Tab.Screen
@@ -158,8 +154,8 @@ function BottomTabs() {
           //   color: theme.tabBarBadgeStyle.color,
           //   backgroundColor: theme.tabBarBadgeStyle.backgroundColor,
           // },
-          tabBarActiveTintColor: theme.tabBarActiveTintColor,//激活
-          tabBarInactiveTintColor: theme.tabBarInactiveTintColor,//非激活
+          tabBarActiveTintColor: theme.tabBarActiveTintColor, //激活
+          tabBarInactiveTintColor: theme.tabBarInactiveTintColor, //非激活
         }}
       />
       <Tab.Screen
@@ -173,8 +169,8 @@ function BottomTabs() {
           //   color: theme.tabBarBadgeStyle.color,
           //   backgroundColor: theme.tabBarBadgeStyle.backgroundColor,
           // },
-          tabBarActiveTintColor: theme.tabBarActiveTintColor,//激活
-          tabBarInactiveTintColor: theme.tabBarInactiveTintColor,//非激活
+          tabBarActiveTintColor: theme.tabBarActiveTintColor, //激活
+          tabBarInactiveTintColor: theme.tabBarInactiveTintColor, //非激活
         }}
       />
     </Tab.Navigator>

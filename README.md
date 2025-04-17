@@ -13,12 +13,27 @@ npm install --save-dev @types/react-native-vector-icons
 1. 生成签名密钥（只需一次）
    在项目根目录运行（或任何你喜欢的目录）：
 ```sh
-
 keytool -genkeypair -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
 然后把 my-release-key.keystore 文件移动到项目目录下的：
 android/app/
 密码123456
+
+react项目内打包：
+✅ 第一步：确认 app/build.gradle 顶部添加了正确的插件
+apply plugin: "com.android.application"
+apply plugin: "com.facebook.react"
+✅ 第二步：在 app/build.gradle 文件最后添加如下代码
+project.afterEvaluate {
+   if (project.tasks.findByName("bundleReleaseJsAndAssets")) {
+      preBuild.dependsOn("bundleReleaseJsAndAssets")
+   }
+}
+✅ 第三步：重新执行打包命令
+cd android
+./gradlew clean
+./gradlew assembleRelease
 ```
+
 
 
 # Getting Started

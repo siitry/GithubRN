@@ -3,7 +3,7 @@ import {Theme, PageParams} from '@/interface';
 
 const initialState = {
   theme: {
-    tabBarActiveTintColor: '#2196F3', //tab激活
+    tabBarActiveTintColor: '#2187b4', //tab激活
     tabBarInactiveTintColor: '#ccc', //tab非激活
     tabBarLabelStyle: {
       // fontSize: number,
