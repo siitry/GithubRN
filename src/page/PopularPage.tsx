@@ -92,7 +92,7 @@ const PopularPage: React.FC = () => {
       const nextPage = isLoadMore ? page + 1 : 1;
       dispatch(setTopTabName(tabName));
       let url: string = `https://api.github.com/search/repositories?q=${tabName}&per_page=${per_page}&page=${nextPage}`;
-      fetchData(url)
+      fetchData(url, 'popular')
         .then(res => {
           console.log('TEST 滑动顶部Tab获取对应 数据', res);
           // setContent(res.data.items);

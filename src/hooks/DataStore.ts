@@ -1,19 +1,24 @@
 import {useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const FLAG_STORAGE = {
+  flag_popular: 'popular',
+  flag_trending: 'trending',
+};
+
 const DataStore = () => {
-  const fetchData = async (url: string) => {
+  const fetchData = async (url: string, flag: string) => {
     try {
-      const wrapData = await fetchLocalData(url);
+      const wrapData = await fetchLocalData(url, flag);
       if (wrapData && checkTimestampValid(wrapData.timestamp)) {
         return wrapData;
       } else {
-        const netData = await fetchNetData(url);
+        const netData = await fetchNetData(url, flag);
         return _wrapData(netData);
       }
     } catch (err) {
       console.error('获取本地或网络数据失败:', err);
-      const netData = await fetchNetData(url);
+      const netData = await fetchNetData(url, flag);
       return _wrapData(netData);
     }
   };
@@ -21,10 +26,7 @@ const DataStore = () => {
   const saveData = async (url: string, data: any, callback?: any) => {
     if (!data || !url) return;
     try {
-      await AsyncStorage.setItem(
-        url,
-        JSON.stringify(_wrapData(data)),
-      );
+      await AsyncStorage.setItem(url, JSON.stringify(_wrapData(data)));
       console.log('数据存储成功');
     } catch (error) {
       console.error('存储数据时出错:', error);
@@ -34,8 +36,9 @@ const DataStore = () => {
   /**
    * 从本地获取数据
    * @param url
+   * @param flag
    */
-  const fetchLocalData = async (url: string) => {
+  const fetchLocalData = async (url: string, flag: string) => {
     try {
       const value = await AsyncStorage.getItem(url);
       if (value !== null) {
@@ -45,23 +48,28 @@ const DataStore = () => {
       }
     } catch (error) {
       console.error('获取数据时出错:', error);
-      return fetchNetData(url).then(data => _wrapData(data));
+      return fetchNetData(url, flag).then(data => _wrapData(data));
     }
   };
 
   /**
    * 获取网路数据
    * @param url
+   * @param flag
    */
-  const fetchNetData = async (url: string) => {
+  const fetchNetData = async (url: string, flag: string) => {
     try {
-      const res = await fetch(url);
-      if (res.ok) {
-        const resData = await res.json();
-        await saveData(url, resData);
-        return resData;
+      if (flag !== FLAG_STORAGE.flag_trending) {
+        const res = await fetch(url);
+        if (res.ok) {
+          const resData = await res.json();
+          await saveData(url, resData);
+          return resData;
+        } else {
+          throw new Error('Network error');
+        }
       } else {
-        throw new Error('Network error');
+        //TODO
       }
     } catch (err) {
       console.error('获取网络数据失败:', err);

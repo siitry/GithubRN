@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    width: '100%',
     height: Platform.OS === 'ios' ? NAV_BAR_HEIGHT_IOS : NAV_BAR_HEIGHT_ANDROID,
   },
   navBarTitleContainer: {
@@ -117,10 +118,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     // position: 'absolute',
-    left: 'auto',
-    right: 'auto',
-    top: 0,
-    bottom: 0,
+    // left: 'auto',
+    // right: 'auto',
+    // top: 0,
+    // bottom: 0,
   },
   navBarButton: {
     //bar两边按钮样式
