@@ -70,6 +70,7 @@ const PopularPage: React.FC = () => {
     const per_page = 10; //每页10条
     const [page, setPage] = useState(1); //当前页码
     const flatListRef = useRef<FlatList>(null);
+    const {navigateTo} = useNavigate();
 
     useEffect(() => {
       if (isFocused) {
@@ -145,6 +146,16 @@ const PopularPage: React.FC = () => {
       );
     };
 
+    const selectItem = (item: any) => {
+      console.log('TEST 点击最热ITEM', item);
+      setSelectedId(item.id);
+      const params = {
+        html_url: item.html_url,
+        full_name: item.full_name,
+      };
+      navigateTo('Details', params);
+    };
+
     return (
       <View style={styles.container}>
         {/*<Text>{tabName} Content</Text>*/}
@@ -155,7 +166,7 @@ const PopularPage: React.FC = () => {
           ref={flatListRef}
           data={content}
           renderItem={({item}) => (
-            <PopularItem item={item} onPress={() => setSelectedId(item.id)} />
+            <PopularItem item={item} onPress={() => selectItem(item)} />
           )}
           keyExtractor={(item, index) => `${item.id.toString()}_${index}`}
           extraData={selectedId}
@@ -181,7 +192,7 @@ const PopularPage: React.FC = () => {
   return (
     <View style={styles.container}>
       <NavigationBar
-        title='最热'
+        title="最热"
         statusBar={{
           backgroundColor: THEME_COLOR,
           barStyle: 'light-content',

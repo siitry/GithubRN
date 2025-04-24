@@ -186,7 +186,7 @@ function RootStack() {
         options={{headerShown: false}}
       />
       <Stack.Screen name="Profile" component={ProfilePage} />
-      <Stack.Screen name="Details" component={DetailsPage} />
+      <Stack.Screen name="Details" component={DetailsPage} options={{ headerShown: false }}/>
       <Stack.Screen name="Fetch" component={FetchDemo} />
       <Stack.Screen name="DataStore" component={DataStoreDemo} />
     </Stack.Navigator>

@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -19,7 +19,6 @@ interface ItemProps {
 }
 
 const PopularItem: React.FC<ItemProps> = ({item, onPress}) => {
-
   // 处理 星星数
   const formatStarCount = (num: number): string => {
     if (num >= 1000) {
@@ -47,10 +46,16 @@ const PopularItem: React.FC<ItemProps> = ({item, onPress}) => {
         <View style={styles.bottom}>
           <View style={styles.bottom}>
             <MaterialIcons style={styles.star} name="star" size={20} />
-            <Text style={styles.gray}>{formatStarCount(item.stargazers_count)}</Text>
+            <Text style={styles.gray}>
+              {formatStarCount(item.stargazers_count)}
+            </Text>
           </View>
           <Text style={styles.gray}>{item.language}</Text>
-          <MaterialIcons style={styles.starCollect} name="star-border" size={20} />
+          <MaterialIcons
+            style={styles.starCollect}
+            name="star-border"
+            size={20}
+          />
         </View>
       </View>
     </TouchableOpacity>
