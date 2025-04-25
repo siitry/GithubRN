@@ -10,7 +10,7 @@ const DataStoreDemo: FC = () => {
   const [fetchData] = DataStore();
   const loadData = () => {
     let url = `https://api.github.com/search/repositories?q=${keywords}&per_page=${20}&page=${1}`;
-    fetchData(url)
+    fetchData(url, key)
       .then(res => {
         console.log('拿到回调数据', res);
         let showData = `初次数据加载时间：${new Date(
