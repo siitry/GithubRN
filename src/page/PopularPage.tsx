@@ -52,11 +52,11 @@ const PopularPage: React.FC = () => {
     '.NET',
   ];
 
-  const toDetails = (id: string | number, name: string) => {
-    dispatch(setLanguageInfo({id, name}));
-    // dispatch(setTheme('#2196F3')); // 测试设置绿色主题
-    navigateTo('Details', {id, name});
-  };
+  // const toDetails = (id: string | number, name: string) => {
+  //   dispatch(setLanguageInfo({id, name}));
+  //   // dispatch(setTheme('#2196F3')); // 测试设置绿色主题
+  //   navigateTo('Details', {id, name});
+  // };
 
   //通用组件页
   const TabContent = ({tabName}: {tabName: string}) => {
@@ -70,7 +70,6 @@ const PopularPage: React.FC = () => {
     const per_page = 10; //每页10条
     const [page, setPage] = useState(1); //当前页码
     const flatListRef = useRef<FlatList>(null);
-    const {navigateTo} = useNavigate();
 
     useEffect(() => {
       if (isFocused) {
@@ -101,7 +100,9 @@ const PopularPage: React.FC = () => {
           if (isLoadMore) {
             setContent(prev => [...prev, ...items]);
             setPage(nextPage);
-            if (items.length < per_page) setHasMore(false); // 没有更多了
+            if (items.length < per_page) {
+              setHasMore(false);
+            } // 没有更多了
           } else {
             setContent(items);
             setPage(1);
@@ -129,13 +130,13 @@ const PopularPage: React.FC = () => {
       }
     };
 
-    const scrollToItem = () => {
-      flatListRef.current?.scrollToIndex({
-        index: 1, // 目标 index
-        animated: true,
-        viewPosition: 0.5, // 0靠顶部，1靠底部，0.5居中
-      });
-    };
+    // const scrollToItem = () => {
+    //   flatListRef.current?.scrollToIndex({
+    //     index: 1, // 目标 index
+    //     animated: true,
+    //     viewPosition: 0.5, // 0靠顶部，1靠底部，0.5居中
+    //   });
+    // };
 
     const genLoadingMore = () => {
       return (

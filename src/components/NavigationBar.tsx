@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -14,6 +14,8 @@ import {
   NAV_BAR_HEIGHT_IOS,
   STATUS_BAR_HEIGHT,
 } from '@/common/config';
+import DeviceInfo from 'react-native-device-info'; //判断设备
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context'; // 使用 Hook 获取安全区域信息
 
 type StatusBarShape = {
   barStyle?: StatusBarStyle; // 'light-content' | 'default' | 'dark-content'
@@ -46,9 +48,26 @@ const NavigationBar: React.FC<PropTypes> = ({
   rightButton,
   leftButton,
 }) => {
+  const insets = useSafeAreaInsets(); // 获取安全区域的边距信息
+  console.log(`当前安全区域信息：顶部 ${insets.top} 底部 ${insets.bottom}`);
+  console.log('判断设备 DeviceInfo', DeviceInfo);
+  const [deviceInfo, setDeviceInfo] = useState<string>('');
+
+  console.log('666' + DeviceInfo.getModel());
+
+  useEffect(() => {
+    const getDeviceDetails = () => {
+      const model = DeviceInfo.getModel(); // 获取设备型号
+      const systemVersion = DeviceInfo.getSystemVersion(); // 获取操作系统版本
+      setDeviceInfo(`设备型号: ${model}, 系统版本: ${systemVersion}`);
+    };
+
+    getDeviceDetails();
+  }, []);
+
   const StatusBarElement = () => {
     return !statusBar.hidden ? (
-      <View style={styles.statusBar}>
+      <View style={[styles.statusBar, {marginTop: insets.top}]}>
         <StatusBar {...statusBar} />
       </View>
     ) : null;
@@ -65,7 +84,7 @@ const NavigationBar: React.FC<PropTypes> = ({
   };
 
   const content = () => {
-    console.log("TEST是否hide", hide)
+    console.log('TEST是否hide', hide);
     return hide ? null : (
       <View style={styles.navBar}>
         {getButtonElement(leftButton)}
@@ -98,7 +117,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0', // 背景色可以根据需求自定义
   },
   statusBar: {
-    height: Platform.OS === 'ios' ? STATUS_BAR_HEIGHT : 0,
+    // height: Platform.OS === 'ios' ? 59 : 0,
+    // marginTop: 59,
   },
   title: {
     fontSize: 20,

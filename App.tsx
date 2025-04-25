@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Provider, useSelector} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {
   NavigationContainer,
   useLinkBuilder,
@@ -197,9 +197,11 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={<LoadingScreen />} persistor={persistor}>
-        <NavigationContainer>
-          <RootStack />
-        </NavigationContainer>
+        {/*<SafeAreaView style={{flex: 1}}>*/}
+          <NavigationContainer>
+            <RootStack />
+          </NavigationContainer>
+        {/*</SafeAreaView>*/}
       </PersistGate>
     </Provider>
   );
