@@ -20,6 +20,7 @@ import {useIsFocused, useNavigationState} from '@react-navigation/native';
 import DataStore from '@/hooks/DataStore.ts';
 import PopularItem from '@/components/PopularItem.tsx';
 import NavigationBar from '@/components/NavigationBar.tsx';
+import FavoriteDao from '@/hooks/FavoriteDao.ts';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -51,6 +52,37 @@ const PopularPage: React.FC = () => {
     'C#',
     '.NET',
   ];
+  const favoriteDao = FavoriteDao('github');
+  const [favoriteKeys, setFavoriteKeys] = useState<string[]>([]);
+
+  // 在组件加载时获取收藏的 keys
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      const keys = await favoriteDao.getFavoriteKeys();
+      console.log('Loaded favorite keys:', keys); // 输出日志，检查是否正确加载
+      setFavoriteKeys(keys);
+    };
+
+    void fetchFavorites();
+  }, []);
+
+  // 处理收藏操作
+  const handleFavorite = async (item: any) => {
+    const index = favoriteKeys.indexOf(item.full_name);
+    if (index !== -1) {
+      // 如果已收藏，取消收藏
+      await favoriteDao.removeFavoriteKey(item.full_name);
+      setFavoriteKeys(prev => prev.filter(key => key !== item.full_name));
+    } else {
+      // 如果未收藏，添加收藏
+      await favoriteDao.saveFavoriteItem(item.full_name, item);
+      setFavoriteKeys(prev => [...prev, item.full_name]);
+    }
+
+    const all = favoriteDao.getAllItems()
+    console.log("aaa", item);
+  };
+
 
   // const toDetails = (id: string | number, name: string) => {
   //   dispatch(setLanguageInfo({id, name}));
@@ -83,7 +115,6 @@ const PopularPage: React.FC = () => {
     }, []);
 
     const _fetchData = (isLoadMore = false) => {
-      console.log(`顶部Tab【${tabName}】被选中`);
       if (isLoadMore) {
         setLoadingMore(true);
       } else {
@@ -94,7 +125,6 @@ const PopularPage: React.FC = () => {
       let url: string = `https://api.github.com/search/repositories?q=${tabName}&per_page=${per_page}&page=${nextPage}`;
       fetchData(url, 'popular')
         .then(res => {
-          console.log('TEST 滑动顶部Tab获取对应 数据', res);
           // setContent(res.data.items);
           const items = res.data.items || [];
           if (isLoadMore) {
@@ -157,6 +187,11 @@ const PopularPage: React.FC = () => {
       navigateTo('Details', params);
     };
 
+    const onFavoriteHandle = (item: any) => {
+      console.log('TEST 点击收藏图标', item);
+      return '1'
+    };
+
     return (
       <View style={styles.container}>
         {/*<Text>{tabName} Content</Text>*/}
@@ -167,7 +202,12 @@ const PopularPage: React.FC = () => {
           ref={flatListRef}
           data={content}
           renderItem={({item}) => (
-            <PopularItem item={item} onPress={() => selectItem(item)} />
+            <PopularItem
+              item={item}
+              onPress={() => selectItem(item)}
+              isFavorite={favoriteKeys.includes(item.full_name)} // 根据 favoriteKeys 判断是否为收藏
+              onFavorite={() => handleFavorite(item)} // 收藏/取消收藏方法
+            />
           )}
           keyExtractor={(item, index) => `${item.id.toString()}_${index}`}
           extraData={selectedId}

@@ -49,11 +49,8 @@ const NavigationBar: React.FC<PropTypes> = ({
   leftButton,
 }) => {
   const insets = useSafeAreaInsets(); // 获取安全区域的边距信息
-  console.log(`当前安全区域信息：顶部 ${insets.top} 底部 ${insets.bottom}`);
-  console.log('判断设备 DeviceInfo', DeviceInfo);
   const [deviceInfo, setDeviceInfo] = useState<string>('');
 
-  console.log('666' + DeviceInfo.getModel());
 
   useEffect(() => {
     const getDeviceDetails = () => {
@@ -84,7 +81,6 @@ const NavigationBar: React.FC<PropTypes> = ({
   };
 
   const content = () => {
-    console.log('TEST是否hide', hide);
     return hide ? null : (
       <View style={styles.navBar}>
         {getButtonElement(leftButton)}

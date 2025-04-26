@@ -16,10 +16,17 @@ interface ItemProps {
     full_name: string;
   };
   onPress: () => void;
+  isFavorite?: boolean;
+  onFavorite?: () => void;
 }
 
-const PopularItem: React.FC<ItemProps> = ({item, onPress}) => {
-  // 处理 星星数
+const PopularItem: React.FC<ItemProps> = ({
+  item,
+  onPress,
+  isFavorite,
+  onFavorite,
+}) => {
+  // 格式化星星数量
   const formatStarCount = (num: number): string => {
     if (num >= 1000) {
       return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
@@ -38,11 +45,11 @@ const PopularItem: React.FC<ItemProps> = ({item, onPress}) => {
             ]}
             source={{uri: item.owner.avatar_url}}
           />
-          {/*<Text style={styles.title}>{item.owner.login}</Text>*/}
-          {/*<Text style={styles.name}>/{item.name}</Text>*/}
           <Text style={styles.title}>{item.full_name}</Text>
         </View>
+
         <Text style={styles.describe}>{item.description}</Text>
+
         <View style={styles.bottom}>
           <View style={styles.bottom}>
             <MaterialIcons style={styles.star} name="star" size={20} />
@@ -50,11 +57,14 @@ const PopularItem: React.FC<ItemProps> = ({item, onPress}) => {
               {formatStarCount(item.stargazers_count)}
             </Text>
           </View>
+
           <Text style={styles.gray}>{item.language}</Text>
+
           <MaterialIcons
-            style={styles.starCollect}
-            name="star-border"
-            size={20}
+            onPress={onFavorite} // 触发父组件传入的收藏/取消收藏方法
+            style={{color: isFavorite ? '#ffcd09' : '#9a9a9a'}}
+            name={isFavorite ? 'star' : 'star-border'}
+            size={26}
           />
         </View>
       </View>
@@ -65,9 +75,7 @@ const PopularItem: React.FC<ItemProps> = ({item, onPress}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#fff', // 背景色可以根据需求自定义
+    backgroundColor: '#fff',
     marginBottom: 2,
     padding: 10,
     marginVertical: 8,
@@ -99,17 +107,9 @@ const styles = StyleSheet.create({
     color: '#ffcd09',
     marginRight: 5,
   },
-  starCollect: {
-    color: '#9a9a9a',
-  },
   title: {
     fontSize: 16,
     color: '#575757',
-  },
-  name: {
-    marginTop: 4,
-    marginBottom: 4,
-    fontWeight: 'bold',
   },
   describe: {
     color: '#707070',

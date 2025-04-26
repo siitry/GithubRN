@@ -42,9 +42,7 @@ const DataStore = () => {
     try {
       const value = await AsyncStorage.getItem(url);
       if (value !== null) {
-        const parsedValue = JSON.parse(value);
-        console.log('获取的数据:', parsedValue);
-        return parsedValue;
+        return JSON.parse(value);
       }
     } catch (error) {
       console.error('获取数据时出错:', error);

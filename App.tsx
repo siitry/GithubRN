@@ -99,7 +99,6 @@ const Stack = createNativeStackNavigator();
 // Tabs
 function BottomTabs() {
   const theme: Theme = useSelector((state: any) => state.root.theme);
-  console.log('当前主题色：', theme);
   // const routes = [
   //   {name: 'Popular', component: PopularPage, tabBarLabel: '最热', tabBarIcon: TabBarIconHot, headerShown: false,},
   // ]
