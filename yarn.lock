@@ -1385,6 +1385,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@kanelloc/react-native-animated-header-scroll-view@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmmirror.com/@kanelloc/react-native-animated-header-scroll-view/-/react-native-animated-header-scroll-view-1.0.0.tgz"
+  integrity sha512-2006ZeIOowcPQY4IYiUWa/gA4CxEJJSD/gAdVs5nxpBOtrSeVY4HbaDcfw2/wxXzDhYLERswHAynaSPTbsKQLQ==
+
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"
   resolved "https://registry.npmmirror.com/@nicolo-ribaudo/eslint-scope-5-internals/-/eslint-scope-5-internals-5.1.1-v1.tgz"

@@ -3,9 +3,9 @@ import {Provider, useSelector} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {
-  NavigationContainer,
-  useLinkBuilder,
-  useTheme,
+    NavigationContainer,
+    useLinkBuilder,
+    useTheme,
 } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -26,16 +26,16 @@ import DataStoreDemo from '@/page/DataStoreDemo.tsx';
 
 // 图标
 const TabBarIconHot = ({color, size}: {color: string; size: number}) => (
-  <MaterialIcons name="whatshot" size={size} color={color} />
+    <MaterialIcons name="whatshot" size={size} color={color} />
 );
 const TabBarIconTrending = ({color, size}: {color: string; size: number}) => (
-  <MaterialIcons name="trending-up" size={size} color={color} />
+    <MaterialIcons name="trending-up" size={size} color={color} />
 );
 const TabBarIconFavorite = ({color, size}: {color: string; size: number}) => (
-  <MaterialIcons name="favorite" size={size} color={color} />
+    <MaterialIcons name="favorite" size={size} color={color} />
 );
 const TabBarIconMy = ({color, size}: {color: string; size: number}) => (
-  <Ionicons name="person" size={size} color={color} />
+    <Ionicons name="person" size={size} color={color} />
 );
 
 const Tab = createBottomTabNavigator();
@@ -98,122 +98,129 @@ const Stack = createNativeStackNavigator();
 
 // Tabs
 function BottomTabs() {
-  const theme: Theme = useSelector((state: any) => state.root.theme);
-  // const routes = [
-  //   {name: 'Popular', component: PopularPage, tabBarLabel: '最热', tabBarIcon: TabBarIconHot, headerShown: false,},
-  // ]
-  return (
-    <Tab.Navigator
-    // tabBar={props => <MyTabBar {...props} />}
-    >
-      <Tab.Screen
-        name="Popular"
-        component={PopularPage}
-        options={{
-          tabBarLabel: '最热',
-          tabBarIcon: TabBarIconHot,
-          headerShown: false, //是否显示头部标题
-          // tabBarLabelStyle: {
-          //   fontSize: 16,
-          //   fontFamily: 'Georgia',
-          //   fontWeight: 300,
-          // },
-          tabBarBadge: 6, //要在选项卡图标上的徽章中显示的文本。接受 string 或 number
-          // tabBarBadgeStyle: {//徽章样式
-          //   color: theme.tabBarBadgeStyle.color,
-          //   backgroundColor: theme.tabBarBadgeStyle.backgroundColor,
-          // },
-          tabBarActiveTintColor: theme.tabBarActiveTintColor, //激活
-          tabBarInactiveTintColor: theme.tabBarInactiveTintColor, //非激活
-        }}
-      />
-      <Tab.Screen
-        name="Trending"
-        component={TrendingPage}
-        options={{
-          tabBarLabel: '趋势',
-          tabBarIcon: TabBarIconTrending,
-          headerShown: false,
-          // tabBarBadgeStyle: {//徽章样式
-          //   color: theme.tabBarBadgeStyle.color,
-          //   backgroundColor: theme.tabBarBadgeStyle.backgroundColor,
-          // },
-          tabBarActiveTintColor: theme.tabBarActiveTintColor, //激活
-          tabBarInactiveTintColor: theme.tabBarInactiveTintColor, //非激活
-        }}
-      />
-      <Tab.Screen
-        name="Favorite"
-        component={FavoritePage}
-        options={{
-          tabBarLabel: '收藏',
-          tabBarIcon: TabBarIconFavorite,
-          headerShown: false,
-          // tabBarBadgeStyle: {//徽章样式
-          //   color: theme.tabBarBadgeStyle.color,
-          //   backgroundColor: theme.tabBarBadgeStyle.backgroundColor,
-          // },
-          tabBarActiveTintColor: theme.tabBarActiveTintColor, //激活
-          tabBarInactiveTintColor: theme.tabBarInactiveTintColor, //非激活
-        }}
-      />
-      <Tab.Screen
-        name="My"
-        component={MyPage}
-        options={{
-          tabBarLabel: '我的',
-          tabBarIcon: TabBarIconMy,
-          headerShown: false,
-          // tabBarBadgeStyle: {//徽章样式
-          //   color: theme.tabBarBadgeStyle.color,
-          //   backgroundColor: theme.tabBarBadgeStyle.backgroundColor,
-          // },
-          tabBarActiveTintColor: theme.tabBarActiveTintColor, //激活
-          tabBarInactiveTintColor: theme.tabBarInactiveTintColor, //非激活
-        }}
-      />
-    </Tab.Navigator>
-  );
+    const theme: Theme = useSelector((state: any) => state.root.theme);
+    // const routes = [
+    //   {name: 'Popular', component: PopularPage, tabBarLabel: '最热', tabBarIcon: TabBarIconHot, headerShown: false,},
+    // ]
+    return (
+        <Tab.Navigator
+            // tabBar={props => <MyTabBar {...props} />}
+        >
+            <Tab.Screen
+                name="Popular"
+                component={PopularPage}
+                options={{
+                    tabBarLabel: '最热',
+                    tabBarIcon: TabBarIconHot,
+                    headerShown: false, //是否显示头部标题
+                    // tabBarLabelStyle: {
+                    //   fontSize: 16,
+                    //   fontFamily: 'Georgia',
+                    //   fontWeight: 300,
+                    // },
+                    // tabBarBadge: 6, //要在选项卡图标上的徽章中显示的文本。接受 string 或 number
+                    // tabBarBadgeStyle: {//徽章样式
+                    //   color: theme.tabBarBadgeStyle.color,
+                    //   backgroundColor: theme.tabBarBadgeStyle.backgroundColor,
+                    // },
+                    tabBarActiveTintColor: theme.tabBarActiveTintColor, //激活
+                    tabBarInactiveTintColor: theme.tabBarInactiveTintColor, //非激活
+                }}
+            />
+            <Tab.Screen
+                name="Trending"
+                component={TrendingPage}
+                options={{
+                    tabBarLabel: '趋势',
+                    tabBarIcon: TabBarIconTrending,
+                    headerShown: false,
+                    // tabBarBadgeStyle: {//徽章样式
+                    //   color: theme.tabBarBadgeStyle.color,
+                    //   backgroundColor: theme.tabBarBadgeStyle.backgroundColor,
+                    // },
+                    tabBarActiveTintColor: theme.tabBarActiveTintColor, //激活
+                    tabBarInactiveTintColor: theme.tabBarInactiveTintColor, //非激活
+                }}
+            />
+            <Tab.Screen
+                name="Favorite"
+                component={FavoritePage}
+                options={{
+                    tabBarLabel: '收藏',
+                    tabBarIcon: TabBarIconFavorite,
+                    headerShown: false,
+                    // tabBarBadgeStyle: {//徽章样式
+                    //   color: theme.tabBarBadgeStyle.color,
+                    //   backgroundColor: theme.tabBarBadgeStyle.backgroundColor,
+                    // },
+                    tabBarActiveTintColor: theme.tabBarActiveTintColor, //激活
+                    tabBarInactiveTintColor: theme.tabBarInactiveTintColor, //非激活
+                }}
+            />
+            <Tab.Screen
+                name="My"
+                component={MyPage}
+                options={{
+                    tabBarLabel: '我的',
+                    tabBarIcon: TabBarIconMy,
+                    headerShown: true,
+                    // tabBarBadgeStyle: {//徽章样式
+                    //   color: theme.tabBarBadgeStyle.color,
+                    //   backgroundColor: theme.tabBarBadgeStyle.backgroundColor,
+                    // },
+                    tabBarActiveTintColor: theme.tabBarActiveTintColor, //激活
+                    tabBarInactiveTintColor: theme.tabBarInactiveTintColor, //非激活
+                    headerStyle: {
+                        backgroundColor: '#2287B4',
+                    },
+                    headerTintColor: '#fff',
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    },
+                }}
+            />
+        </Tab.Navigator>
+    );
 }
 
 function RootStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={BottomTabs}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen name="Profile" component={ProfilePage} />
-      <Stack.Screen name="Details" component={DetailsPage} options={{ headerShown: false }}/>
-      <Stack.Screen name="Fetch" component={FetchDemo} />
-      <Stack.Screen name="DataStore" component={DataStoreDemo} />
-    </Stack.Navigator>
-  );
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+                name="Home"
+                component={BottomTabs}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen name="Profile" component={ProfilePage} options={{headerShown: false}}/>
+            <Stack.Screen name="Details" component={DetailsPage} options={{headerShown: false}} />
+            <Stack.Screen name="Fetch" component={FetchDemo} />
+            <Stack.Screen name="DataStore" component={DataStoreDemo} />
+        </Stack.Navigator>
+    );
 }
 
 export default function App() {
-  return (
-    <Provider store={store}>
-      <PersistGate loading={<LoadingScreen />} persistor={persistor}>
-        {/*<SafeAreaView style={{flex: 1}}>*/}
-          <NavigationContainer>
-            <RootStack />
-          </NavigationContainer>
-        {/*</SafeAreaView>*/}
-      </PersistGate>
-    </Provider>
-  );
+    return (
+        <Provider store={store}>
+            <PersistGate loading={<LoadingScreen />} persistor={persistor}>
+                {/*<SafeAreaView style={{flex: 1}}>*/}
+                <NavigationContainer>
+                    <RootStack />
+                </NavigationContainer>
+                {/*</SafeAreaView>*/}
+            </PersistGate>
+        </Provider>
+    );
 }
 
 const styles = StyleSheet.create({
-  iconImg: {
-    width: 20,
-    height: 20,
-  },
-  viewContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    iconImg: {
+        width: 20,
+        height: 20,
+    },
+    viewContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });

@@ -51,18 +51,25 @@ const MyPage: FC = () => {
     );
   };
 
+  const toNav = () => {
+    navigateTo('Profile');
+  }
+
   return (
     <View style={styles.container}>
-      <NavigationBar
-        title={'我的'}
-        statusBar={{
-          backgroundColor: THEME_COLOR,
-          barStyle: 'light-content',
-        }}
-        style={{backgroundColor: THEME_COLOR}}
-        rightButton={getRightButton()}
-        leftButton={getLeftButton()}
-      />
+      {/*<NavigationBar*/}
+      {/*  title={'我的'}*/}
+      {/*  statusBar={{*/}
+      {/*    backgroundColor: THEME_COLOR,*/}
+      {/*    barStyle: 'light-content',*/}
+      {/*  }}*/}
+      {/*  style={{backgroundColor: THEME_COLOR}}*/}
+      {/*  rightButton={getRightButton()}*/}
+      {/*  leftButton={getLeftButton()}*/}
+      {/*/>*/}
+      <TouchableOpacity onPress={toNav}>
+        <Text>啊啊啊</Text>
+      </TouchableOpacity>
       <Text style={styles.welcomeText}>MyPage</Text>
       <Button onPress={() => changeTheme()}>修改主题色</Button>
       <Button onPress={() => toGetData()}>跳转数据页</Button>
