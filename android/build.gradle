@@ -9,13 +9,22 @@ buildscript {
     }
     repositories {
         google()
+        jcenter()
         mavenCentral()
+        maven { url 'https://repo1.maven.org/maven2/' }
     }
     dependencies {
         classpath("com.android.tools.build:gradle")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
     }
+}
+allprojects {
+  repositories {
+    google()
+    jcenter()
+    maven { url 'https://repo1.maven.org/maven2/' }
+  }
 }
 
 apply plugin: "com.facebook.react.rootproject"

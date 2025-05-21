@@ -1,6 +1,6 @@
 import type {FC} from 'react';
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {AnimatedScrollView} from '@kanelloc/react-native-animated-header-scroll-view';
 
 const ProfilePage: FC = () => {
@@ -23,22 +23,22 @@ const ProfilePage: FC = () => {
     };
 
     return (
-        <View>
-            <Text>aa</Text>
-        </View>
-        // <SafeAreaView style={styles.container}>
-        //     <AnimatedScrollView
-        //         // HeaderNavbarComponent={<HeaderNavBar />}
-        //         // TopNavBarComponent={<TopNavBar />}
-        //         headerImage={require('@/assets/images/cabin.jpg')}
-        //     >
-        //         {data.map((e) => {
-        //             return <View key={e}>
-        //                 <Text>{e}</Text>
-        //             </View>;
-        //         })}
-        //     </AnimatedScrollView>
-        // </SafeAreaView>
+        // <View>
+        //     <Text>aa</Text>
+        // </View>
+        <SafeAreaView style={styles.container}>
+            <AnimatedScrollView
+                HeaderNavbarComponent={<HeaderNavBar />}
+                TopNavBarComponent={<TopNavBar />}
+                headerImage={require('@/assets/images/cabin.jpg')}
+            >
+                {data.map((e) => {
+                    return <View key={e}>
+                        <Text>{e}</Text>
+                    </View>;
+                })}
+            </AnimatedScrollView>
+        </SafeAreaView>
         // <AnimatedScrollView
         //     // HeaderNavbarComponent={HeaderNavBar()}
         //     // TopNavBarComponent={<TopNavBar />}
@@ -55,7 +55,6 @@ const ProfilePage: FC = () => {
 
 const styles = StyleSheet.create({
     container: {
-
         backgroundColor: '#F5FCFC',
     },
 });

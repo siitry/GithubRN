@@ -67,8 +67,10 @@ const MyPage: FC = () => {
       {/*  rightButton={getRightButton()}*/}
       {/*  leftButton={getLeftButton()}*/}
       {/*/>*/}
-      <TouchableOpacity onPress={toNav}>
-        <Text>啊啊啊</Text>
+      <TouchableOpacity onPress={toNav} style={{width:'100%'}} >
+        <View style={styles.items}>
+          <Text>信息</Text>
+        </View>
       </TouchableOpacity>
       <Text style={styles.welcomeText}>MyPage</Text>
       <Button onPress={() => changeTheme()}>修改主题色</Button>
@@ -93,5 +95,14 @@ const styles = StyleSheet.create({
   icon: {
     color: 'white',
   },
+  items: {
+    width: '100%',
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#a2a2a2',
+    cursor: 'pointer',
+  }
 });
 export default MyPage;
